@@ -1,0 +1,210 @@
+@mixin heightCenter($height) {
+  height: $height;
+  line-height: $height;
+}
+
+@mixin fontSize($font) {
+  @if $font == 12 or $font == 12px {
+    font-size: 12px;
+    letter-spacing: 0.24px;
+  }
+
+  @if $font == 14 or $font == 14px {
+    font-size: 14px;
+    letter-spacing: 0.28px;
+  }
+
+  @if $font == 16 or $font == 16px {
+    font-size: 16px;
+    letter-spacing: 0.32px;
+  }
+
+  @if $font == 20 or $font == 20px {
+    font-size: 20px;
+    letter-spacing: 0.40px;
+  }
+}
+
+@mixin size($width,$height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin background($url) {
+  background: url($url) no-repeat;
+  background-size: contain;
+}
+
+
+$calendar-prev: './calendar-prev.svg';
+
+$calendar-next: './calendar-next.svg';
+
+$background-white: #FFFFFF;
+
+$input-hint-color: rgba(80,93,100,0.3);
+
+$input-hover-color: rgba(80,93,100,0.7);
+
+$color-emphasize: #15A0F9;
+
+$border-radius: 8px;
+
+$text-white: #FFFFFF;
+
+$color-hover: #007CC2;
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+input[type="number"]{-moz-appearance:textfield;}
+
+.calendar-box {
+  .flex-center {
+    display: flex;
+    align-items: center;
+  }
+  $height: 32px;
+  $border: 1px;
+  $beforeTop: 8px;
+
+  position: relative;
+  .showDate {
+    @include heightCenter($height);
+    background: $background-white;
+    border: $border solid $input-hint-color;
+    @include fontSize(16);
+    border-radius: 4px;
+    padding-left: 8px;
+    cursor: pointer;
+  }
+  .calendar {
+    width: 278px;
+    padding: 20px 10px 10px 10px;
+    background-color: $background-white;
+    position: absolute;
+    top: $height + $border + $beforeTop;
+    border: 1px solid $input-hint-color;
+    border-radius: 4px;
+    opacity:.95;
+    z-index: 1;
+    &:before {
+      position: absolute;
+      left: 30px;
+      top: -$beforeTop;
+      content: "";
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: $beforeTop solid rgba(80,93,100,.3);
+      border-top: 0;
+      border-bottom-color: $input-hint-color;
+    }
+    .calendar-tools {
+      @include heightCenter(32px);
+      @include fontSize(20);
+      justify-content: space-between;
+      color:#5e7a88;
+      .calendar-button {
+        display: inline-block;
+        @include size(16px,16px);
+      }
+      .calendar-prev {
+        @include background($calendar-prev);
+      }
+      .calendar-next {
+        @include background($calendar-next);
+      }
+    }
+    table {
+      clear: both;
+      width: 100%;
+      margin-bottom: 10px;
+      border-collapse: collapse;
+      color: $input-hover-color;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      tr {
+        display: flex;
+        justify-content: space-around;
+        @include fontSize(14);
+        td {
+          width: 20px;
+          text-align: center;
+          @include heightCenter(32px);
+          cursor: pointer;
+          &.week{
+            pointer-events: none !important;
+            cursor: default !important;
+          }
+          &.disabled {
+            color: #c0c0c0;
+            pointer-events: none !important;
+            cursor: default !important;
+          }
+          &.selected {
+            color: #FF0000;
+          }
+        }
+      }
+    }
+    .day-time {
+      justify-content: center;
+      padding-bottom: 10px;
+      .input-box {
+        width: 50px;
+        .input-content {
+          padding: 5px 12px;
+        }
+      }
+      input {
+        width: 32px;
+        padding: 4px;
+        outline: none;
+        border-radius: 4px;
+        border: 1px solid $input-hint-color;
+        &:hover {
+          border-color: $input-hover-color;
+        }
+      }
+      .day-time-text {
+        padding: 5px 8px 5px 5px;
+      }
+    }
+    .button-box {
+      padding: 0 10px;
+      justify-content: space-around;
+
+      .major-button {
+        display: inline-block;
+        background: $color-emphasize;
+        border-radius: $border-radius;
+        @include heightCenter(32px);
+        color: $text-white;
+        text-align: center;
+        width: 80px;
+        cursor: pointer;
+        &:hover {
+          background-color: $color-hover;
+        }
+      }
+
+      .cancel-button {
+        display: inline-block;
+        border-radius: $border-radius;
+        border: $border solid $color-emphasize;
+        @include heightCenter(30px);
+        color: $color-emphasize;
+        text-align: center;
+        cursor: pointer;
+        width: 78px;
+        &:hover {
+          border: $border solid $color-hover;
+          color: $color-hover;
+        }
+      }
+    }
+  }
+}
