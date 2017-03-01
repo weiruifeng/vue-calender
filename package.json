@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --open --config ./config/webpack.config.js",
-    "lint": "eslint ./**/*.js && eslint ./**/*.vue --fix",
+    "lint": "eslint ./src/**/*.js && eslint ./src/**/*.vue --fix",
     "precommit": "npm run lint"
   },
   "dependencies": {
