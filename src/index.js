@@ -218,6 +218,3 @@ export default {
         }
     }
 };
-
-let a;
-
